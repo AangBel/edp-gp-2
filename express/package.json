@@ -1,0 +1,23 @@
+{
+  "name": "express",
+  "version": "1.0.0",
+  "description": "swapi",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node --watch server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AangBel/edp-gp-2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AangBel/edp-gp-2/issues"
+  },
+  "homepage": "https://github.com/AangBel/edp-gp-2#readme",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
