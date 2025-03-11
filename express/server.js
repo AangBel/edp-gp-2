@@ -24,28 +24,52 @@ app.get('/api/characters', async (req, res) => {
     }
     catch(err)
     {res.send('u suck')}
-})
-
-
-
-
-app.get('/api/planets' , async (req, res) => {
-
- try {
-        // const client = await MongoClient.connect(url);
-        // const db = client.db(dbName);
-        // const collection = db.collection(collectionName);
-        // const planets = await collection.find({}).toArray();
-        // res.json(planets);
-
-        res.send('anakin skywalker!');
-
-   
- } catch (err) {
-    console.error("error ", err);
-    res.status(500).send("error!!!");
- }
 });
+
+app.get('/api/films', async (req, res) => {
+    const client = new MongoClient(url);
+    try{
+        const db = await client.db('swapi');
+       // console.log('Connected to the DB', db)
+
+        const collection = db.collection('films')
+        console.log(collection)
+        const films = await collection.find({}).toArray();
+        console.log(films)
+        res.json(films)
+
+        res.status(200).json(films)
+    }
+    catch(err)
+    {res.send('u suck')}
+});
+
+app.get('/api/planets', async (req, res) => {
+    const client = new MongoClient(url);
+    try{
+        const db = await client.db('swapi');
+    //    console.log('Connected to the DB 51', db)
+
+        const collection = db.collection('planets')
+        console.log(collection, "this is collection at 54")
+
+        const planets = await collection.find({}).toArray();
+        console.log(planets, "this is planets")
+
+        res.json(planets)
+
+        res.status(200).json(planets)
+    }
+    catch(err)
+    {res.send('u suck')}
+});
+
+
+
+
+
+
+
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
