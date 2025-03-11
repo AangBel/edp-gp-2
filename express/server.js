@@ -1,17 +1,30 @@
-const express = require("express");
+import express from 'express'
+import { Db, MongoClient } from "mongodb"
 
-// import cors from 'cors';
-const MongoClient = require ('mongodb'); 
+const url = 'mongodb://localhost:27017/';
 
-
-const url = process.env.MONGO_DB_URL;
-const dbName = process.env.MONGO_DB;
-const collectionName = process.env.MONGO_DB_COLLECTION;
 
 const app = express();
-// app.use(cors()); // Enable CORS for all routes
 app.use(express.json()); // Middleware to parse JSON bodies
 const PORT = 3000;
+
+app.get('/api/characters', async (req, res) => {
+    const client = new MongoClient(url);
+    try{
+        const db = await client.db('swapi');
+       // console.log('Connected to the DB', db)
+
+        const collection = db.collection('characters')
+        console.log(collection)
+        const characters = await collection.find({}).toArray();
+        console.log(characters)
+        res.json(characters)
+
+        res.status(200).json(characters)
+    }
+    catch(err)
+    {res.send('u suck')}
+})
 
 
 
